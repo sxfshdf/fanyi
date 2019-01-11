@@ -1,0 +1,31 @@
+{
+  "pages":[
+    "pages/index/index",
+    "pages/logs/logs"
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor":"#fff",
+    "navigationBarTitleText":"翻译君",
+    "navigationBarTextStyle":"black",
+    "navigationStyle":"default"
+  },
+  "tabBar": {
+    "borderStyle":"black",
+    "color": "#999",
+    "backgroundColor":"#fff",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "assets/img/home.png",
+        "selectedIconPath":"assets/img/home.png"
+      },
+      {
+        "pagePath": "pages/logs/logs",
+        "text": "日志",
+        "iconPath": "assets/img/history.png"
+      }
+    ]
+  }
+}
