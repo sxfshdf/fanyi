@@ -1,27 +1,80 @@
 /**index.wxss**/
-@import '../../assets/fontAwesome.wxss'
-.userinfo {
+@import '../../assets/fontAwesome.wxss';
+
+.language {
+  width: 100%;
+  padding: 32rpx 0;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  justify-content: space-around;
+  align-items: cneter;
+  background-color: #0e3be7;
+  color: #fff;
 }
-
-.userinfo-avatar {
-  width: 128rpx;
-  height: 128rpx;
-  margin: 20rpx;
-  border-radius: 50%;
+.language .down {
+  margin-left: 12rpx;
 }
-
-.userinfo-nickname {
-  color: #aaa;
+.language .exchange {
+  font-size: 32rpx;
 }
-
-.usermotto {
-  margin-top: 200px;
+.textarea-wrap {
+  background-color: #fff;
+  /* box-shadow: 0 4px 12px rgba(0,0,0,0.06); */
+  border-radius: 2px;
+  /* border: 1px solid red; */
 }
-
-.fa-bug{
-  font-size: 40rpx;
+image.close {
+  position: absolute;
+  z-index: 100;
+  width: 36rpx;
+  height: 36rpx;
+  right: 24rpx;
+  top: 24rpx;
+}
+.input-area {
+  width: 100%;
+  /* border: 1px solid green; */
+  position: relative;
+  background-color: #fff;
+  padding-top: 48rpx;
+}
+.input-area .number {
   color: #999;
+  position: absolute;
+  bottom: 12rpx;
+  left: 32rpx;
+  font-size: 32rpx;
+}
+.textarea-wrap textarea {
+  /* border: 1px solid red; */
+  /* width: calc(100% - 52rpx); */
+  width: 100%;
+  padding: 24rpx 28rpx 68rpx 28rpx;
+  margin: 0;
+  box-sizing: border-box;
+  word-break:break-all;
+}
+.textarea-placeholder {
+  color: #999;
+}
+
+.text-area {
+  margin-top: 32rpx;
+  width: 100%;
+}
+.text-area .language-from {
+  padding: 0 32rpx;
+  width: 100%;
+  word-break: break-all;
+  box-sizing: border-box;
+}
+.text-area .voice {
+  margin-left: 12rpx;
+}
+.line {
+  width: calc(100% - 64rpx);
+  margin-left: 32rpx;
+  height: 1px;
+  background-color: #eee;
+  box-sizing: border-box;
+  margin-top: 40rpx;
 }

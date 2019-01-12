@@ -1,14 +1,30 @@
 <!--index.wxml-->
-<view class="container">
-<view bindtap='changeMsg'>{{name}}<icon class="fa fa-bug fa-lg" /></view>
-  <view class="userinfo">
-    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
-    <block wx:else>
-      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
-      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-    </block>
+<view class="container home">
+  <view class="language">
+    <navigator url="/pages/language/language">
+      <text>中文</text>
+      <icon class="fa fa-caret-down down"/>
+    </navigator>
+    <icon class="fa fa-exchange exchange" aria-hidden="true"></icon>
+    <navigator url="/pages/language/language">
+      <text>英语</text>
+      <icon class="fa fa-caret-down down"/>
+    </navigator>
   </view>
-  <view class="usermotto">
-    <text class="user-motto">{{motto}}</text>
+
+  <view class="input-area">
+    <text class="number">0/140</text>
+    <image class="close" hidden="{{showClose}}" src="/assets/img/close.png" bindtap='onTapClose'></image>
+    <view class="textarea-wrap">
+      <textarea placeholder="请输入需要翻译的内容" bindinput='onInput'   bindconfirm='onComfirm' bindblur='onComfirm' value="{{value}}"></textarea>
+    </view>
   </view>
+  <view class="text-area">
+    <view class="language-from">
+      <text>哈哈{{query}}</text>
+      <icon class="fa fa-volume-up voice" aria-hidden="true"></icon>
+    </view>
+    <view class="line"></view>
+  </view>
+
 </view>
