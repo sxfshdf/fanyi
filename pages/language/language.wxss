@@ -1,1 +1,28 @@
 /* pages/language/language.wxss */
+
+
+.language {
+  margin-top: 24rpx;
+  padding-bottom: 24rpx;
+}
+.item-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.item {
+  width: 100%;
+  padding: 24rpx 40rpx 24rpx 40rpx;
+  box-sizing: border-box;
+  font-size: 36rpx;
+  font-weight: 300;
+  border-bottom: 1px solid #eee;
+  color: #666;
+}
+.item:last-child {
+  border-bottom: none;
+}
+.item.selected {
+  font-weight: 600;
+  color: #0e3be7;
+}

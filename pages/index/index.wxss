@@ -1,41 +1,43 @@
 /**index.wxss**/
 @import '../../assets/fontAwesome.wxss';
 
+
+.container.home {
+  position: relative;
+}
 .language {
   width: 100%;
   padding: 32rpx 0;
   display: flex;
   justify-content: space-around;
-  align-items: cneter;
+  align-items: center;
   background-color: #0e3be7;
   color: #fff;
 }
-.language .down {
-  margin-left: 12rpx;
-}
-.language .exchange {
-  font-size: 32rpx;
+.language navigator {
+  display: flex;
+  align-items: center;
 }
 .textarea-wrap {
   background-color: #fff;
-  /* box-shadow: 0 4px 12px rgba(0,0,0,0.06); */
   border-radius: 2px;
-  /* border: 1px solid red; */
 }
-image.close {
+.click-wrapper {
+  height: 80rpx;
+  width: 80rpx;
   position: absolute;
   z-index: 100;
-  width: 36rpx;
-  height: 36rpx;
-  right: 24rpx;
-  top: 24rpx;
+  right: 0;
+  top: 134rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* border: 1px solid red; */
 }
 .input-area {
   width: 100%;
   /* border: 1px solid green; */
-  position: relative;
   background-color: #fff;
-  padding-top: 48rpx;
 }
 .input-area .number {
   color: #999;
@@ -46,35 +48,65 @@ image.close {
 }
 .textarea-wrap textarea {
   /* border: 1px solid red; */
-  /* width: calc(100% - 52rpx); */
-  width: 100%;
-  padding: 24rpx 28rpx 68rpx 28rpx;
+  width: calc(100% - 80rpx);
+  padding: 40rpx 0 20rpx 20rpx;
   margin: 0;
   box-sizing: border-box;
   word-break:break-all;
+  font-size: 36rpx;
+  box-sizing: border-box;
+  height: 200rpx;
 }
 .textarea-placeholder {
   color: #999;
 }
 
 .text-area {
-  margin-top: 32rpx;
+  margin-top: 40rpx;
   width: 100%;
-}
-.text-area .language-from {
   padding: 0 32rpx;
+  box-sizing: border-box;
+}
+.text-area .result,
+.text-area .language-from {
   width: 100%;
   word-break: break-all;
   box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+  font-size: 40rpx;
+}
+.language-from text {
+  font-weight: 600;
+  width: calc(100% - 80rpx);
 }
 .text-area .voice {
-  margin-left: 12rpx;
+  /* margin-left: 16rpx; */
+  margin-top: 24rpx;
 }
 .line {
-  width: calc(100% - 64rpx);
-  margin-left: 32rpx;
   height: 1px;
   background-color: #eee;
   box-sizing: border-box;
-  margin-top: 40rpx;
+  margin-top: 36rpx;
+  margin-bottom: 36rpx;
+}
+.result{
+  font-size: 40rpx;
+  width: 100%;
+  font-weight: 600;
+}
+.more-title {
+  font-size: 32rpx;
+  color: #666;
+}
+.itemWrapper {
+  margin-top: 20rpx;
+}
+.itemWrapper text{
+  font-size: 36rpx;
+  margin-top: 16rpx;
+  font-weight: 600;
+  color: #333;
 }

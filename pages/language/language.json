@@ -1,3 +1,8 @@
 {
-  "usingComponents": {}
+  "usingComponents": {},
+  "navigationBarBackgroundColor": "#0e3be7",
+  "navigationBarTextStyle": "white",
+  "navigationBarTitleText": "选择语言",
+  "backgroundColor": "#eeeeee",
+  "backgroundTextStyle": "light"
 }

@@ -2,6 +2,10 @@
 App({
   onLaunch: function () {
     // 展示本地存储能力
+
+    this.globalData.curLang = wx.getStorageSync('curLang') || this.globalData.langList[2]
+
+
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
@@ -34,6 +38,56 @@ App({
     })
   },
   globalData: {
-    userInfo: null
+    userInfo: null,
+    curLang: {},
+    langList: [{
+      'chs': '中文',
+      'lang': 'zh-CHS',
+      'index': 0
+    },{
+      'chs': '日语',
+      'lang': 'ja',
+      'index': 1
+    },{
+      'chs': '英文',
+      'lang': 'EN',
+      'index': 2
+    },{
+      'chs': '韩文',
+      'lang': 'ko',
+      'index': 3
+    },{
+      'chs': '法文',
+      'lang': 'fr',
+      'index': 4
+    },{
+      'chs': '俄文',
+      'lang': 'pt',
+      'index': 5
+    },{
+      'chs': '西班牙文',
+      'lang': 'es',
+      'index': 6
+    },{
+      'chs': '葡萄牙文',
+      'lang': 'pt',
+      'index': 7
+    },{
+      'chs': '越南文',
+      'lang': 'vi',
+      'index': 8
+    },{
+      'chs': '德文',
+      'lang': 'de',
+      'index': 9
+    },{
+      'chs': '阿拉伯文',
+      'lang': 'ar',
+      'index': 10
+    },{
+      'chs': '印尼文',
+      'lang': 'id',
+      'index': 11
+    },]
   }
 })

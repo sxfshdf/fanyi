@@ -1,30 +1,47 @@
 <!--index.wxml-->
+
 <view class="container home">
   <view class="language">
     <navigator url="/pages/language/language">
       <text>中文</text>
-      <icon class="fa fa-caret-down down"/>
+      <image class="arrow-down icon" src="/assets/img/arrow-down.png"></image>
     </navigator>
-    <icon class="fa fa-exchange exchange" aria-hidden="true"></icon>
+    <image class="exchange icon" src="/assets/img/exchange.png"></image>
     <navigator url="/pages/language/language">
-      <text>英语</text>
-      <icon class="fa fa-caret-down down"/>
+      <text>{{curLang.chs}}</text>
+      <image class="arrow-down icon" src="/assets/img/arrow-down.png"></image>
     </navigator>
   </view>
-
+  <view class="click-wrapper" bindtap='onTapClose' hidden="{{showClose}}"> 
+    <image class="close icon" src="/assets/img/close.png" ></image>
+  </view>
   <view class="input-area">
-    <text class="number">0/140</text>
-    <image class="close" hidden="{{showClose}}" src="/assets/img/close.png" bindtap='onTapClose'></image>
-    <view class="textarea-wrap">
-      <textarea placeholder="请输入需要翻译的内容" bindinput='onInput'   bindconfirm='onComfirm' bindblur='onComfirm' value="{{value}}"></textarea>
+    <view class="textarea-wrap" wx:if="{{!showTextarea}}">
+      <textarea placeholder="请输入需要翻译的内容" bindinput='onInput'   bindconfirm='onComfirm' bindblur='onComfirm' value="{{query}}"></textarea>
     </view>
   </view>
-  <view class="text-area">
+  <view class="text-area" wx:if="{{result && result.translation}}">
     <view class="language-from">
-      <text>哈哈{{query}}</text>
-      <icon class="fa fa-volume-up voice" aria-hidden="true"></icon>
+      <text>{{result.query}}</text>
+      <image class="voice icon" src="/assets/img/voice.png" bindtap="speak" hidden="{{audioPlay}}" data-url="speak"></image>
+      <image class="voice icon" src="/assets/img/voice-play.png" hidden="{{!audioPlay}}"></image>
     </view>
     <view class="line"></view>
+    <view class="result">
+      <text>{{result.translation[0]}}</text>
+      <image class="voice icon" src="/assets/img/voice.png" bindtap="speak" hidden="{{audioPlay}}" data-url="tSpeak"></image>
+      <image class="voice icon" src="/assets/img/voice-play.png" hidden="{{!audioPlay}}"></image>
+    </view>
+    <view class="line"></view>
+    <view calss="moreExplans">
+      <text class="more-title">更多翻译</text>
+      <view class="itemWrapper">
+        <text >{{result.basic.explains}}</text>
+      </view>
+    </view>
   </view>
 
 </view>
+
+
+

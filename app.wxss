@@ -7,7 +7,12 @@
   justify-content: space-between;
   /* padding: 40rpx 0; */
   box-sizing: border-box;
+  color: #333;
 }
 page {
   background-color: #fbfbfb;
+}
+.icon {
+  width: 36rpx;
+  height: 36rpx;
 }
