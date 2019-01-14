@@ -3,7 +3,12 @@ App({
   onLaunch: function () {
     // 展示本地存储能力
 
-    this.globalData.curLang = wx.getStorageSync('curLang') || this.globalData.langList[2]
+
+   
+
+    this.globalData.preLang = wx.getStorageSync('preLang') || this.globalData.langList[0]
+    this.globalData.curLang = wx.getStorageSync('curLang') || this.globalData.langList[3]
+
 
 
     var logs = wx.getStorageSync('logs') || []
@@ -40,54 +45,59 @@ App({
   globalData: {
     userInfo: null,
     curLang: {},
+    preLang: {},
     langList: [{
+      'chs': '自动检测',
+      'index': 0,
+      'lang': 'auto'
+    },{
       'chs': '中文',
       'lang': 'zh-CHS',
-      'index': 0
+      'index': 1
     },{
       'chs': '日语',
       'lang': 'ja',
-      'index': 1
+      'index': 2
     },{
       'chs': '英文',
       'lang': 'EN',
-      'index': 2
+      'index':3
     },{
       'chs': '韩文',
       'lang': 'ko',
-      'index': 3
+      'index': 4
     },{
       'chs': '法文',
       'lang': 'fr',
-      'index': 4
+      'index': 5
     },{
       'chs': '俄文',
       'lang': 'pt',
-      'index': 5
+      'index': 6
     },{
       'chs': '西班牙文',
       'lang': 'es',
-      'index': 6
+      'index': 7
     },{
       'chs': '葡萄牙文',
       'lang': 'pt',
-      'index': 7
+      'index': 8
     },{
       'chs': '越南文',
       'lang': 'vi',
-      'index': 8
+      'index': 9
     },{
       'chs': '德文',
       'lang': 'de',
-      'index': 9
+      'index': 10
     },{
       'chs': '阿拉伯文',
       'lang': 'ar',
-      'index': 10
+      'index': 11
     },{
       'chs': '印尼文',
       'lang': 'id',
-      'index': 11
+      'index': 12
     },]
   }
 })

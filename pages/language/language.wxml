@@ -1,9 +1,9 @@
 <!--pages/language/language.wxml-->
 <view class="container language">
-  <view class="item {{index === curLang.index ? 'selected' : ''}}" wx:for="{{langList}}" wx:key="index" wx:for-item="language" data-chs="{{language.chs}}" data-lang="{{language.lang}}" data-index="{{language.index}}" bindtap="selectLang">
+  <view class="item {{index === chooseIndex ? 'selected' : ''}}" wx:for="{{langList}}" wx:key="index" wx:for-item="language" data-chs="{{language.chs}}" data-lang="{{language.lang}}" data-index="{{language.index}}" bindtap="selectLang">
     <view class="item-inner">
       <text class="langName">{{language.chs}}</text>
-      <image class="select icon" src="/assets/img/select.png" wx:if="{{index === curLang.index}}" />
+      <image class="select icon" src="/assets/img/select.png" wx:if="{{index === chooseIndex }}" />
     </view>
   </view>
 </view>

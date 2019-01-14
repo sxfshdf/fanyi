@@ -2,12 +2,12 @@
 
 <view class="container home">
   <view class="language">
-    <navigator url="/pages/language/language">
-      <text>中文</text>
+    <navigator url="/pages/language/language?index={{preLang.index}}&refer=pre">
+      <text id="xxx" data-text="{{preLang.chs}}">{{preLang.chs}}</text>
       <image class="arrow-down icon" src="/assets/img/arrow-down.png"></image>
     </navigator>
-    <image class="exchange icon" src="/assets/img/exchange.png"></image>
-    <navigator url="/pages/language/language">
+    <image class="exchange icon" src="/assets/img/exchange.png" bindtap="exchange"></image>
+    <navigator url="/pages/language/language?index={{curLang.index}}&refer=cur">
       <text>{{curLang.chs}}</text>
       <image class="arrow-down icon" src="/assets/img/arrow-down.png"></image>
     </navigator>
@@ -23,20 +23,37 @@
   <view class="text-area" wx:if="{{result && result.translation}}">
     <view class="language-from">
       <text>{{result.query}}</text>
+      <view wx:if="{{result.speakUrl}}">
       <image class="voice icon" src="/assets/img/voice.png" bindtap="speak" hidden="{{audioPlay}}" data-url="speak"></image>
       <image class="voice icon" src="/assets/img/voice-play.png" hidden="{{!audioPlay}}"></image>
+      </view>
     </view>
     <view class="line"></view>
     <view class="result">
       <text>{{result.translation[0]}}</text>
+      <view wx:if="{{result.tSpeakUrl}}">
       <image class="voice icon" src="/assets/img/voice.png" bindtap="speak" hidden="{{audioPlay}}" data-url="tSpeak"></image>
       <image class="voice icon" src="/assets/img/voice-play.png" hidden="{{!audioPlay}}"></image>
+      </view>
     </view>
-    <view class="line"></view>
-    <view calss="moreExplans">
-      <text class="more-title">更多翻译</text>
-      <view class="itemWrapper">
-        <text >{{result.basic.explains}}</text>
+    <view wx:if="{{result.basic.explains.length}}">
+      <view class="line"></view>
+      <view calss="moreExplans">
+        <text class="more-title">更多解释</text>
+        <view class="itemWrapper">
+          <text >{{result.basic.explains}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="history">
+    <view class="historyItemWrapper" wx:for="{{history}}" wx:for-item="historyItem" wx:key="index">
+      <view class="historyInfo">
+        <text class="origin">{{historyItem.data}}</text>
+        <text class="translation">{{historyItem.result.translation[0]}}</text>
+      </view>
+      <view class="delete-history" bindtap='deleteHistory'> 
+        <image class="delete icon" src="/assets/img/close.png" ></image>
       </view>
     </view>
   </view>

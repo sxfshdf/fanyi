@@ -12,9 +12,12 @@ Page({
     showClose: true,
     query: '',
     curLang: {},
+    preLang: {},
     result: {},
     audioPlay: false,
-    showTextarea: false
+    showTextarea: false,
+    preLangText: '',
+    history: []
   },
   onLoad(options){
     if(options.query) {
@@ -22,6 +25,7 @@ Page({
         query: options.query
       })
     }
+    wx.clearStorage()
   },
   onShow(){
     if(this.data.curLang.lang !== app.globalData.curLang.lang) {
@@ -29,8 +33,18 @@ Page({
         curLang: app.globalData.curLang
       })
     }
+    if(this.data.preLang.lang !== app.globalData.preLang.lang) {
+      this.setData({
+        preLang: app.globalData.preLang
+      })
+    }
     // console.log(this.data.curLang)
+
+    // this.setData({
+    //   history: wx.getStorageSync('history')
+    // })
     this.onComfirm()
+    this.getFields()
   },
   onTapClose(e){
     this.setData({
@@ -39,6 +53,8 @@ Page({
       showTextarea: false,
       result: {}
     })
+
+    console.log(this.data.history)
   },
   onInput(e){
     this.setData({ "query": e.detail.value})
@@ -47,32 +63,93 @@ Page({
     }else{
       this.setData({ "showClose": true })
     }
-    this.setData({result: {}})
+    // this.setData({result: {}})
   },
   onComfirm(){
     if(!this.data.query) return 
-    
-    translate(this.data.query,{from: "auto", to: this.data.curLang.lang}).then(res => {
+    wx.showLoading({
+      title: '正在翻译',
+    })
+    translate(this.data.query.trim().replace(/ /ig,'').replace(/[\r\n]/g,""),{from: this.data.preLang.lang, to: this.data.curLang.lang}).then(res => {
       // this.data.set({})
       console.log(res)
       // this.setData({query: ''})
       res.translation[0] = this.UpFirstString(res.translation[0])
-
-      res.basic.explains = res.basic.explains.join('; ').toString()
+      
+      // if( res.basic.explains && typeof(res.basic.explains) === 'object'){
+      //   res.basic.explains = res.basic.explains.join('; ').toString()
+      // }
+      
+      // console.log(res.basic.explains)
+      // if(!res.basic.hasOwnProperty("explains")){
+      //   console.log(111)
+      // }
+      // return 
+      
+      if(res.hasOwnProperty("basic") && res.basic.hasOwnProperty("explains")){
+        res.basic.explains = res.basic.explains.join('; ').toString()
+      }
 
       let {query,basic,translation,speakUrl,tSpeakUrl} = res
       this.setData({result: {query,basic,translation,speakUrl,tSpeakUrl}})
-      // console.log(this.data.result)
-      // wx.playVoice({
-      //   filePath: res.speakUrl,
-      //   complete() { console.log('ok')}
-      // })
+
       this.setData({
         showTextarea: true
       })
-      console.log(this.data.result)
-      
+      wx.hideLoading()
+
+      let history = wx.getStorageSync('history') || []
+      history.unshift({
+        data: this.data.query.trim().replace(/ /ig,'').replace(/[\r\n]/g,""),
+        result: this.data.result
+      })
+      wx.setStorageSync('history',history)
+      // this.setData({
+      //   hisroty: 
+      // })
+      this.setData({
+        history: wx.getStorageSync('history')
+      })
     })
+    
+  },
+  getFields() {
+    
+    wx.createSelectorQuery().select('#xxx').fields({
+      dataset: true,
+    }, 
+    (res) => {
+      res.dataset // 节点的dataset
+      this.setData({
+        preLangText: res.dataset.text
+      })
+    }).exec()
+  },
+  exchange(e){
+    
+    
+    if(this.data.preLangText === '自动检测') {
+      wx.showToast({
+        title: '自动检测无法对调语言',
+        icon: 'none',
+        duration: 2000
+      })
+    }else{
+       
+      [app.globalData.curLang, app.globalData.preLang] = [app.globalData.preLang, app.globalData.curLang]
+
+       wx.setStorageSync('prevLang', app.globalData.preLang)
+       wx.setStorageSync('curLang', app.globalData.curLang)
+       
+       
+
+      this.setData({
+        preLang: app.globalData.preLang,
+        curLang: app.globalData.curLang
+      })
+      
+      this.onComfirm()
+    }
   },
   speak(e){
     let url = e.currentTarget.dataset.url
