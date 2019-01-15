@@ -12,26 +12,6 @@
     "navigationStyle": "default",
     "backgroundColor": "#0e3be7",
     "backgroundColorTop": "#0e3be7",
-    "backgroundColorBottom": "#fbfbfb"
-  },
-  "tabBar": {
-    "borderStyle": "black",
-    "color": "#666",
-    "selectedColor": "#0e3be7",
-    "backgroundColor": "#fbfbfb",
-    "list": [
-      {
-        "pagePath": "pages/index/index",
-        "text": "首页",
-        "iconPath": "assets/img/home.png",
-        "selectedIconPath": "assets/img/home-selected.png"
-      },
-      {
-        "pagePath": "pages/history/history",
-        "text": "历史",
-        "iconPath": "assets/img/history.png",
-        "selectedIconPath": "assets/img/history-selected.png"
-      }
-    ]
+    "backgroundColorBottom": "#f8f8f8"
   }
 }

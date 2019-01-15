@@ -8,7 +8,8 @@ function translate(q,{from = "auto", to = "auto"} = {from: "auto", to: "auto"}) 
 
     let salt = Date.now()
     let sign = md5(appKey+q+salt+key)
-  
+    
+    
     wx.request({
       url: "https://openapi.youdao.com/api",
       data: {
@@ -24,11 +25,11 @@ function translate(q,{from = "auto", to = "auto"} = {from: "auto", to: "auto"}) 
           resolve(res.data)
         } else {
           reject({ status: "error", msg: "翻译失败"}) 
-          wx.showToast({
-            title: "翻译失败",
-            icon: "none",
-            duration: 2000
-          })
+            wx.showToast({
+              title: "翻译失败",
+              icon: "none",
+              duration: 2000
+            })
         }
       },
       fail() {

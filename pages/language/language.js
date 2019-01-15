@@ -51,6 +51,10 @@ Page({
       wx.setStorageSync('preLang',language)
       app.globalData.preLang = language
     }
-    wx.switchTab({url: '/pages/index/index'})
+    console.log(1)
+    wx.navigateBack({
+      delta: 1
+    })
+    console.log(2)
   }
 })

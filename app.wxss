@@ -10,7 +10,7 @@
   color: #333;
 }
 page {
-  background-color: #fbfbfb;
+  background-color: #f8f8f8;
 }
 .icon {
   width: 40rpx;

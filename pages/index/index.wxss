@@ -39,13 +39,7 @@
   /* border: 1px solid green; */
   background-color: #fff;
 }
-.input-area .number {
-  color: #999;
-  position: absolute;
-  bottom: 12rpx;
-  left: 32rpx;
-  font-size: 32rpx;
-}
+
 .textarea-wrap textarea {
   /* border: 1px solid red; */
   width: calc(100% - 80rpx);
@@ -54,11 +48,12 @@
   box-sizing: border-box;
   word-break:break-all;
   font-size: 36rpx;
-  box-sizing: border-box;
   height: 200rpx;
 }
+
 .textarea-placeholder {
-  color: #999;
+  color: #ccc;
+  font-weight: 200;
 }
 
 .text-area {
@@ -86,7 +81,7 @@
   margin-top: 24rpx;
 }
 .line {
-  height: 1px;
+  height: 2rpx;
   background-color: #eee;
   box-sizing: border-box;
   margin-top: 36rpx;
@@ -114,13 +109,14 @@
 .history {
   width: 100%;
   /* border: 1px solid green; */
+  
 }
 
 .historyItemWrapper {
   /* display: flex; */
   width: 100%;
   box-sizing: border-box;
-  padding: 24rpx 32rpx;
+  
   /* justify-content: space-between;
   align-items: center; */
   /* border: 1px solid red; */
@@ -134,10 +130,10 @@
   /* border: 1px solid red; */
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: center;
   position: absolute;
-  right: 20rpx;
-  top: 6rpx;
+  right: 0;
+  top: 12rpx;
 }
 
 .delete-history .delete {
@@ -145,13 +141,22 @@
   height: 32rpx;
   opacity: 0.4;
 }
+.detailClick {
+  /* border: 1px solid red; */
+  position: absolute;
+  height: 88rpx;
+  width: calc(100% - 80rpx);
+}
 .historyInfo {
   width: 100%;
   display: flex;
-  align-items: flex-end;
+  align-items: center;
+  padding: 28rpx 32rpx;
+  /* border: 1px solid red; */
+  box-sizing: border-box;
 }
 .history .origin {
-  font-size:34rpx;
+  font-size:32rpx;
   max-width:30%;
   /* border:1px solid red; */
   /* display:block; */
@@ -160,7 +165,7 @@
   text-overflow:ellipsis;
 }
 .history .translation {
-  color: #888;
+  color: #999;
   font-size: 28rpx;
   max-width:50%;
   /* border:1px solid red; */
@@ -169,4 +174,27 @@
   white-space:nowrap;
   text-overflow:ellipsis;
   margin-left: 20rpx;
+}
+
+.clearHistory {
+  /* border: 1px solid red; */
+  height: 80rpx;
+  width: 280rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 47rpx;
+  background-color: #0e3be7;
+  color: #fff;
+  font-size: 28rpx;
+  margin: 40rpx auto;
+  box-shadow: 0 12rpx 12rpx -3rpx rgba(14,59,231,0.4)
+}
+.clearHover{
+  background-color: #0d3dd6;
+}
+
+.originQuery{
+  max-height: 200rpx;
+  /* border: 1px solid red; */
 }

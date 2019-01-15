@@ -1,6 +1,7 @@
 <!--index.wxml-->
 
 <view class="container home">
+  <!-- 切换语言 -->
   <view class="language">
     <navigator url="/pages/language/language?index={{preLang.index}}&refer=pre">
       <text id="xxx" data-text="{{preLang.chs}}">{{preLang.chs}}</text>
@@ -12,28 +13,31 @@
       <image class="arrow-down icon" src="/assets/img/arrow-down.png"></image>
     </navigator>
   </view>
+
   <view class="click-wrapper" bindtap='onTapClose' hidden="{{showClose}}"> 
     <image class="close icon" src="/assets/img/close.png" ></image>
   </view>
+  <!-- 输入内容 -->
   <view class="input-area">
     <view class="textarea-wrap" wx:if="{{!showTextarea}}">
-      <textarea placeholder="请输入需要翻译的内容" bindinput='onInput'   bindconfirm='onComfirm' bindblur='onComfirm' value="{{query}}"></textarea>
+      <textarea maxlength="-1" placeholder="请输入需要翻译的内容" bindinput='onInput' bindconfirm='onComfirm' bindblur='onComfirm' value="{{query}}"></textarea>
     </view>
   </view>
-  <view class="text-area" wx:if="{{result && result.translation}}">
+  <!-- 翻译结果 -->
+  <view class="text-area" wx:if="{{showTranslation}}">
     <view class="language-from">
-      <text>{{result.query}}</text>
+      <textarea class="originQuery" bindinput='onInput' bindconfirm='onComfirm' data-query="{{result.query}}" value="{{result.query}}" maxlength="-1" auto-height="{{true}}" bindblur="onComfirm"></textarea>
       <view wx:if="{{result.speakUrl}}">
-      <image class="voice icon" src="/assets/img/voice.png" bindtap="speak" hidden="{{audioPlay}}" data-url="speak"></image>
-      <image class="voice icon" src="/assets/img/voice-play.png" hidden="{{!audioPlay}}"></image>
+      <image class="voice icon" src="/assets/img/voice.png" bindtap="speak" hidden="{{audioPlayOrigin}}" data-url="speak"></image>
+      <image class="voice icon" src="/assets/img/voice-play.png" hidden="{{!audioPlayOrigin}}" bindtap="pause"></image>
       </view>
     </view>
     <view class="line"></view>
     <view class="result">
       <text>{{result.translation[0]}}</text>
       <view wx:if="{{result.tSpeakUrl}}">
-      <image class="voice icon" src="/assets/img/voice.png" bindtap="speak" hidden="{{audioPlay}}" data-url="tSpeak"></image>
-      <image class="voice icon" src="/assets/img/voice-play.png" hidden="{{!audioPlay}}"></image>
+      <image class="voice icon" src="/assets/img/voice.png" bindtap="speak" hidden="{{audioPlayTrans}}" data-url="tSpeak"></image>
+      <image class="voice icon" src="/assets/img/voice-play.png" hidden="{{!audioPlayTrans}}" bindtap="pause"></image>
       </view>
     </view>
     <view wx:if="{{result.basic.explains.length}}">
@@ -46,15 +50,20 @@
       </view>
     </view>
   </view>
-  <view class="history">
+  <!-- 历史记录 -->
+  <view class="history" wx:if="{{showHistory}}">
     <view class="historyItemWrapper" wx:for="{{history}}" wx:for-item="historyItem" wx:key="index">
+      <view class="detailClick"  bindtap="toDetail" data-index="{{index}}"></view>
       <view class="historyInfo">
         <text class="origin">{{historyItem.data}}</text>
-        <text class="translation">{{historyItem.result.translation[0]}}</text>
+        <text class="translation" decode="{{true}}">{{historyItem.result.translation[0]}} &nbsp; {{historyItem.result.basic.explains}}</text>
       </view>
-      <view class="delete-history" bindtap='deleteHistory'> 
+      <view class="delete-history" bindtap='deleteHistory' data-index="{{index}}"> 
         <image class="delete icon" src="/assets/img/close.png" ></image>
       </view>
+    </view>
+    <view class="clearHistory" hover-class="clearHover" bindtap="clearHistory" wx:if="{{history.length}}">
+      <text>清除历史记录</text> 
     </view>
   </view>
 
