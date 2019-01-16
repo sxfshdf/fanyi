@@ -27,21 +27,39 @@
   <view class="text-area" wx:if="{{showTranslation}}">
     <view class="language-from">
       <textarea class="originQuery" bindinput='onInput' bindconfirm='onComfirm' data-query="{{result.query}}" value="{{result.query}}" maxlength="-1" auto-height="{{true}}" bindblur="onComfirm"></textarea>
-      <view wx:if="{{result.speakUrl}}">
-      <image class="voice icon" src="/assets/img/voice.png" bindtap="speak" hidden="{{audioPlayOrigin}}" data-url="speak"></image>
-      <image class="voice icon" src="/assets/img/voice-play.png" hidden="{{!audioPlayOrigin}}" bindtap="pause"></image>
+      <view class="iconWrapper">
+        <view wx:if="{{result.speakUrl}}">
+          <view class="clickWrapper" bindtap="speak" wx:if="{{!audioPlayOrigin}}" data-url="speak">
+            <image class="voice icon" src="/assets/img/voice.png" ></image>
+          </view>
+          <view class="clickWrapper" wx:if="{{audioPlayOrigin}}" bindtap="pause">
+            <image class="voice icon" src="/assets/img/voice-play.png" ></image>
+          </view>
+        </view>
+        <view class="clickWrapper" bindtap="copy" data-query="{{result.query}}">
+          <image class="copy icon" src="/assets/img/copy.png" ></image>
+        </view>
       </view>
     </view>
-    <view class="line"></view>
+    <view class="line iconSeperation"></view>
     <view class="result">
       <text>{{result.translation[0]}}</text>
-      <view wx:if="{{result.tSpeakUrl}}">
-      <image class="voice icon" src="/assets/img/voice.png" bindtap="speak" hidden="{{audioPlayTrans}}" data-url="tSpeak"></image>
-      <image class="voice icon" src="/assets/img/voice-play.png" hidden="{{!audioPlayTrans}}" bindtap="pause"></image>
+      <view class="iconWrapper">
+        <view wx:if="{{result.tSpeakUrl}}">
+          <view class="clickWrapper" bindtap="speak" wx:if="{{!audioPlayTrans}}" data-url="tSpeak">
+            <image class="voice icon" src="/assets/img/voice.png" ></image>
+          </view>
+          <view class="clickWrapper" wx:if="{{audioPlayTrans}}" bindtap="pause"> 
+            <image class="voice icon" src="/assets/img/voice-play.png" ></image>
+          </view>
+        </view>
+        <view class="clickWrapper" bindtap="copy" data-translation="{{result.translation[0]}}">
+          <image class="copy icon" src="/assets/img/copy.png"></image>
+        </view>
       </view>
     </view>
     <view wx:if="{{result.basic.explains.length}}">
-      <view class="line"></view>
+      <view class="line iconSeperation"></view>
       <view calss="moreExplans">
         <text class="more-title">更多解释</text>
         <view class="itemWrapper">

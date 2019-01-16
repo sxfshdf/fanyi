@@ -33,26 +33,14 @@ Page({
     // wx.clearStorage()
   },
   onShow(){
-    if(this.data.curLang.lang !== app.globalData.curLang.lang) {
-      this.setData({
-        curLang: app.globalData.curLang
-      })
-    }
-    if(this.data.preLang.lang !== app.globalData.preLang.lang) {
-      this.setData({
-        preLang: app.globalData.preLang
-      })
-    }
-    // console.log(this.data.curLang)
-
     this.setData({
+      preLang: app.globalData.preLang,
+      curLang: app.globalData.curLang,
       history: wx.getStorageSync('history')
     })
-
     if(this.data.query){
       this.onComfirm()
     }
-    
     this.getFields()
   },
   onTapClose(e){
@@ -73,7 +61,16 @@ Page({
     this.setData({ 
       "query": e.detail.value,
     })
-    
+    if(e.currentTarget.dataset.query){
+      if(!e.detail.value.length){
+        this.setData({
+          showTextarea: true,
+          showHistory: true,
+          showTextarea: false,
+          showTranslation: false
+        })
+      }
+    }
     if (this.data.query.length > 0){
       this.setData({ "showClose": false })
     }else{
@@ -277,6 +274,33 @@ Page({
         }
       }
     })
+  },
+  copy(e){
+    let dataset = e.currentTarget.dataset
+    if(dataset.query){
+      wx.setClipboardData({
+        data: dataset.query,
+        success(res) {
+          // wx.getClipboardData({
+          //   success(res) {
+          //     console.log(res.data) // data
+          //   }
+          // })
+        }
+      })
+    }
+    if(dataset.translation){
+      wx.setClipboardData({
+        data: 'data',
+        success(res) {
+          // wx.getClipboardData({
+          //   success(res) {
+          //     console.log(res.data) // data
+          //   }
+          // })
+        }
+      })
+    }
   },
   UpFirstString(string){
     return string.substring(0,1).toUpperCase() + string.substring(1)
