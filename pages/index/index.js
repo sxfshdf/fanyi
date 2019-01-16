@@ -248,27 +248,25 @@ Page({
   deleteHistory(e){
     let index = e.currentTarget.dataset.index
     let history = wx.getStorageSync('history')
-   
-    history.splice(index,1)
-    wx.setStorageSync('history',history)
-    this.setData({
-      history: history
-    })
+    if(history){
+      history.splice(index,1)
+      wx.setStorageSync('history',history)
+      this.setData({
+        history: history
+      })
+    }
   },
   clearHistory(e){
-    const that = this
+    let that = this
     wx.showModal({
       title: '提示',
       content: '确定要删除所有历史记录吗？',
       success(res) {
         if (res.confirm) {
-          // let history = wx.getStorageSync('history')
-          // console.log(this)
           wx.setStorageSync('history',[])
           that.setData({
             history: []
           })
-          // console.log(this.data.history)
         } else if (res.cancel) {
           console.log('用户点击取消')
         }

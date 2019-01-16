@@ -80,12 +80,8 @@
 .text-area .iconWrapper{
   display: flex;
   align-items: center;
-  /* margin-top: 10rpx; */
   margin-left: -10rpx;
 }
-/* .text-area .clickWrapper.copy {
-  margin-left: 10rpx;
-} */
 .text-area .clickWrapper{
   width: 80rpx;
   height: 80rpx;
@@ -202,7 +198,6 @@
 }
 
 .clearHistory {
-  /* border: 1px solid red; */
   height: 80rpx;
   width: 280rpx;
   display: flex;
@@ -221,6 +216,5 @@
 
 .originQuery{
   max-height: 200rpx;
-  /* border: 1px solid red; */
   font-size: 40rpx;
 }
