@@ -14,25 +14,27 @@
     </navigator>
   </view>
 
-  <view class="click-wrapper" bindtap='onTapClose' hidden="{{showClose}}"> 
+  <view class="click-wrapper" bindtap='onTapClose' hidden="{{showClose}}" > 
     <image class="close icon" src="/assets/img/close.png" ></image>
   </view>
   <!-- 输入内容 -->
   <view class="input-area">
-    <view class="textarea-wrap" wx:if="{{!showTextarea}}">
-      <textarea maxlength="-1" placeholder="请输入需要翻译的内容" bindinput='onInput' bindconfirm='onComfirm' bindblur='onComfirm' value="{{query}}"></textarea>
+    <view class="textarea-wrap" wx:if="{{showTextarea}}">
+      <textarea maxlength="-1" auto-height placeholder="请输入需要翻译的内容" bindinput='onInput'  bindconfirm='onComfirm' value="{{query}}"></textarea>
+      <!-- <input maxlength="-1"  placeholder="请输入需要翻译的内容" bindinput='onInput' bindblur="onComfirm" bindconfirm='onComfirm' value="{{query}}"></input> -->
     </view>
   </view>
   <!-- 翻译结果 -->
   <view class="text-area" wx:if="{{showTranslation}}">
     <view class="language-from">
-      <textarea class="originQuery" bindinput='onInput' bindconfirm='onComfirm' data-query="{{result.query}}" value="{{result.query}}" maxlength="-1" auto-height="{{true}}" bindblur="onComfirm"></textarea>
+      <!-- <textarea class="originQuery" data-refer="result" bindinput='onInput' bindconfirm='onComfirm' bindblur="onComfirm" data-query="{{result.query}}" value="{{result.query}}" maxlength="-1" auto-height="{{true}}"></textarea> -->
+      <!-- <text class="resultQuery">{{result.query}}</text> -->
       <view class="iconWrapper">
         <view wx:if="{{result.speakUrl}}">
-          <view class="clickWrapper" bindtap="speak" wx:if="{{!audioPlayOrigin}}" data-url="speak">
+          <view class="clickWrapper" bindtap="speak" wx:if="{{audioPlayOrigin===1 ? true : false}}" data-url="speak">
             <image class="voice icon" src="/assets/img/voice.png" ></image>
           </view>
-          <view class="clickWrapper" wx:if="{{audioPlayOrigin}}" bindtap="pause">
+          <view class="clickWrapper" wx:if="{{audioPlayOrigin===0 ? true : false}}" bindtap="pause">
             <image class="voice icon" src="/assets/img/voice-play.png" ></image>
           </view>
         </view>
@@ -46,10 +48,10 @@
       <text>{{result.translation[0]}}</text>
       <view class="iconWrapper">
         <view wx:if="{{result.tSpeakUrl}}">
-          <view class="clickWrapper" bindtap="speak" wx:if="{{!audioPlayTrans}}" data-url="tSpeak">
+          <view class="clickWrapper" bindtap="speak" wx:if="{{audioPlayTrans===1 ? true : false}}" data-url="tSpeak">
             <image class="voice icon" src="/assets/img/voice.png" ></image>
           </view>
-          <view class="clickWrapper" wx:if="{{audioPlayTrans}}" bindtap="pause"> 
+          <view class="clickWrapper" wx:if="{{audioPlayTrans===0 ? true : false}}" bindtap="pause"> 
             <image class="voice icon" src="/assets/img/voice-play.png" ></image>
           </view>
         </view>

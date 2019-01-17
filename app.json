@@ -12,6 +12,10 @@
     "navigationStyle": "default",
     "backgroundColor": "#0e3be7",
     "backgroundColorTop": "#0e3be7",
-    "backgroundColorBottom": "#f6f6f6"
+    "backgroundColorBottom": "#fff"
+  },
+  "networkTimeout": {
+    "request": 10000,
+    "downloadFile": 10000
   }
 }

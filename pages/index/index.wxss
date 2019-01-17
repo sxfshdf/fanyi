@@ -21,6 +21,8 @@
 .textarea-wrap {
   background-color: #fff;
   border-radius: 2px;
+  height: 100%;
+  padding: 32rpx 0 32rpx 32rpx;
 }
 .click-wrapper {
   height: 80rpx;
@@ -38,18 +40,25 @@
   width: 100%;
   /* border: 1px solid green; */
   background-color: #fff;
+  height: 100%;
+  /* margin-top: 20rpx; */
 }
 
+.textarea-wrap input {
+  border: 1px solid red;
+  width: calc(100% - 80rpx);
+}
 .textarea-wrap textarea {
   /* border: 1px solid red; */
   width: calc(100% - 80rpx);
-  padding: 40rpx 0 20rpx 20rpx;
+  
   margin: 0;
   box-sizing: border-box;
   word-break:break-all;
   font-size: 40rpx;
-  height: 200rpx;
+  /* min-height: 108rpx; */
   font-weight: 600;
+  max-height: 200rpx;
 }
 
 .textarea-placeholder {
@@ -58,7 +67,7 @@
 }
 
 .text-area {
-  margin-top: 40rpx;
+  /* margin-top: 12rpx; */
   width: 100%;
   padding: 0 32rpx;
   box-sizing: border-box;
@@ -73,9 +82,20 @@
   /* align-items: center; */
   font-size: 36rpx;
 }
-.language-from textarea {
+.language-from text.resultQuery {
   font-weight: 600;
   width: calc(100% - 80rpx);
+  font-size: 40rpx;
+  margin-top: 20rpx;
+  /* border: 1px solid red; */
+}
+.language-from textarea.originQuery {
+  font-weight: 600;
+  width: calc(100% - 80rpx);
+  max-height: 200rpx;
+  font-size: 40rpx;
+  /* border: 1px solid red; */
+  /* min-height: 88rpx; */
 }
 .text-area .iconWrapper{
   display: flex;
@@ -130,7 +150,8 @@
 .history {
   width: 100%;
   /* border: 1px solid green; */
-  
+  height: 100%;
+  background-color: #f6f6f6;
 }
 
 .historyItemWrapper {
@@ -214,7 +235,3 @@
   background-color: #0d3dd6;
 }
 
-.originQuery{
-  max-height: 200rpx;
-  font-size: 40rpx;
-}

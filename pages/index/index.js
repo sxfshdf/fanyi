@@ -14,15 +14,17 @@ Page({
     curLang: {},
     preLang: {},
     result: {},
-    showTextarea: false,
+    showTextarea: true,
     preLangText: '',
     history: [],
     showHistory: true,
     showTranslation: false,
     historyItem: {},
-    audioPlayOrigin: false,
-    audioPlayTrans: false,
-    audioOnplay: false
+    audioPlayOrigin: 1,
+    audioPlayTrans: 1,
+    audioOnplay: false,
+
+    // tapClose: ''
   },
   onLoad(options){
     if(options.query) {
@@ -44,42 +46,66 @@ Page({
     this.getFields()
   },
   onTapClose(e){
+  //  console.log('==========',e.currentTarget.dataset.close)
     this.setData({
-      "query": '',
-      "showClose": true,
-      showTextarea: false,
+      showClose: true,
+      showTextarea: true,
       result: {},
       showHistory: true,
       showTranslation: false,
-      audioPlayOrigin: false,
-      audioPlayTrans: false,
+      audioPlayOrigin: 1,
+      audioPlayTrans: 1,
+      // tapClose: e.currentTarget.dataset.close  
+      // query: ''
     })
+    setTimeout(()=>{
+      this.setData({
+        query: '',
+      })
+    },100)
     audio.stop()
-    console.log(this.data.history)
+    
   },
   onInput(e){
+
+    // if(this.data.tapClose === "close"){
+    //   this.setData({
+    //     tapClose: ''
+    //   })
+    // }
+    
     this.setData({ 
-      "query": e.detail.value,
+      query: e.detail.value,
     })
-    if(e.currentTarget.dataset.query){
-      if(!e.detail.value.length){
-        this.setData({
-          showTextarea: true,
-          showHistory: true,
-          showTextarea: false,
-          showTranslation: false
-        })
-      }
+    
+    if(!e.detail.value.length){
+      this.setData({
+        // showTextarea: true,
+        showHistory: true,
+        // showTextarea: false,
+        showTranslation: false
+      })
     }
-    if (this.data.query.length > 0){
+    if (this.data.query.length){
       this.setData({ "showClose": false })
     }else{
       this.setData({ "showClose": true })
     }
     // this.setData({result: {}})
   },
-  onComfirm(){
+  onComfirm(e){
+
+
+    // console.log("ssssss",this.data.tapClose)
+
+    // console.log("value",this.data.query)
+
+console.log("ccccc",this.data.query)
+    // if(this.data.tapClose === 'close') return 
+
     if(!this.data.query) return 
+    
+
     let query = this.data.query.trim().replace(/[\r\n]/g,"")
     console.log(query)
     if(!query.length){
@@ -94,7 +120,7 @@ Page({
       })
       translate(query,{from: this.data.preLang.lang, to: this.data.curLang.lang}).then(res => {
         // this.data.set({})
-        console.log(res)
+        // console.log("res",res)
         // this.setData({query: ''})
         res.translation[0] = this.UpFirstString(res.translation[0])
         
@@ -114,14 +140,11 @@ Page({
   
         let {query,basic,translation,speakUrl,tSpeakUrl} = res
         this.setData({result: {query,basic,translation,speakUrl,tSpeakUrl}})
-  
-        this.setData({
-          showTextarea: true
-        })
+        
         wx.hideLoading()
   
         let history = wx.getStorageSync('history') || []
-        console.log("ppp",history)
+ 
         let historyItem = {
           data: this.data.query.trim().replace(/[\r\n]/g,""),
           result: this.data.result
@@ -130,29 +153,42 @@ Page({
         if(history.length){
           let historyIndex = history.findIndex( item => {
             // console.log(item.data)
-            console.log("historyItem.data",historyItem.data)
+            
             // console.log(item.result.translation)
-            console.log("historyItem.result.translation",historyItem.result.translation)
+            
             return item.data.trim().replace(/[\r\n]/g,"") === historyItem.data && item.result.translation[0] === historyItem.result.translation[0]
           })
-          console.log(historyIndex)
+         
           if(historyIndex !== -1){
             history.splice(historyIndex,1)
           }
         }
-        history.unshift(historyItem)
-       
+        // console.log("00000000",this.data.tapClose)
+        // if( this.date.tapClose !== 'close'){
+          history.unshift(historyItem)
+        // }
+        
         wx.setStorageSync('history',history)
         // this.setData({
         //   hisroty: 
         // })
         this.setData({
+          // query: '',
           history: wx.getStorageSync('history'),
           showHistory: false,
-          showTranslation: true
+          showTranslation: true,
+          // showTextarea: true,
+          showClose: false,
+          // tapClose: ''
+        })
+      
+      }).catch(err => {
+        wx.showToast({
+          title: "翻译失败",
+          icon: "none",
+          duration: 2000
         })
       })
-      
     }
     
   },
@@ -190,34 +226,70 @@ Page({
     }
   },
   speak(e){
+   
     let url = e.currentTarget.dataset.url
-    
-    if(url === 'speak'){
+
+    if(url === 'speak') {
       audio.src = this.data.result.speakUrl
-    }else{
+    }else {
       audio.src = this.data.result.tSpeakUrl
     }
+    
     audio.play()
-    audio.onPlay(() => {
+    audio.onPlay(()=>{
       if(url === 'speak'){
         this.setData({
-          audioPlayOrigin: true,
-          audioPlayTrans: false
+          audioPlayOrigin: 0,
+          audioPlayTrans: 1
         })
       }else{
         this.setData({
-          audioPlayOrigin: false,
-          audioPlayTrans: true
+          audioPlayOrigin: 1,
+          audioPlayTrans: 0
         })
       }
-      
     })
-    audio.onEnded(() => {
+
+    audio.onEnded(()=>{
       this.setData({
-        audioPlayOrigin: false,
-        audioPlayTrans: false
+        audioPlayOrigin: 1,
+        audioPlayTrans: 1
       })
     })
+    // if(url === 'speak'){
+    //   console.log(123)
+    //   const audio = wx.createInnerAudioContext()
+    //   audio.src = this.data.result.speakUrl
+    //   audio.play()
+    //   audio.onPlay(() => {
+    //     console.log(234)
+    //     this.setData({
+    //       audioPlayOrigin: 0,
+          
+    //     })
+    //   })
+    //   audio.onEnded(() => {
+    //     this.setData({
+    //       audioPlayOrigin: 1,
+          
+    //     })
+    //   })
+    // }else if(url === 'tSpeak') {
+    //   const audio = wx.createInnerAudioContext()
+    //   audio.src = this.data.result.tSpeakUrl
+    //   audio.play()
+    //   audio.onPlay(() => {
+    //     this.setData({
+    //       audioPlayTrans: 0,
+    //     })
+    //   })
+    //   audio.onEnded(() => {
+    //     this.setData({
+    //       audioPlayTrans: 1,
+    //     })
+    //   })
+    // }
+    
   },
   pause(e){
     if(!this.data.audioOnplay){
@@ -268,7 +340,7 @@ Page({
             history: []
           })
         } else if (res.cancel) {
-          console.log('用户点击取消')
+          
         }
       }
     })
